@@ -7,10 +7,29 @@ pool:
 environment: 'dev'
   
 stages:
-  - stage: Build
+  - stage: Build gradle
+    jobs:
+    - job:
+      steps:
+        - task: Gradle@3
+          inputs:
+            gradleWrapperFile: 'gradlew'
+            tasks: 'build'
+            publishJUnitResults: true
+            testResultsFiles: '**/TEST-*.xml'
+            javaHomeOption: 'JDKVersion'
+            sonarQubeRunAnalysis: false
+            spotBugsAnalysis: false
+  - stage: Push docker image
     jobs:
       - job:
-        displayName: Build gradle
+        displayName: Build Dockerfile
         steps:
-          - script: |
-              ls
+          - task: Docker@2
+            inputs:
+              containerRegistry: 'azuredevops'
+              repository: 'cicddevops.azurecr.io'
+              command: 'buildAndPush'
+              Dockerfile: '**/Dockerfile'
+              tags: '$(Build.BuildId)'
+            

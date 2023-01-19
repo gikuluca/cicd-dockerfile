@@ -9,6 +9,7 @@ stages:
   - stage: Build gradle
     jobs:
     - job:
+      displayName: Gradlew build 
       steps:
         - task: Gradle@3
           inputs:

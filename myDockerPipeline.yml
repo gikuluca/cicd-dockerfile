@@ -2,7 +2,7 @@ trigger:
   - main
 
 pool:
-  name: 'Ubuntu-latest'
+  name: 'ubuntu-latest'
 
   
 stages:

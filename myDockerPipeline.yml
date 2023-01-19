@@ -30,7 +30,7 @@ stages:
           - task: Docker@2
             inputs:
               containerRegistry: 'azuredevops'
-              repository: 'cicddevops.azurecr.io'
+              repository: 'gikuluca/cicddevops.azurecr.io'
               command: 'buildAndPush'
               Dockerfile: '**/Dockerfile'
               tags: '$(Build.BuildId)'

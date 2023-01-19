@@ -1,0 +1,14 @@
+trigger:
+  - main
+
+pool:
+  name: dev
+  
+stages:
+  - stage: Build
+    jobs:
+      - job:
+        displayName: Build gradle
+        steps:
+          - script: |
+              ls

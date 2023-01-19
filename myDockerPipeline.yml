@@ -6,7 +6,7 @@ pool:
 
   
 stages:
-  - stage: Build gradle
+  - stage: BuildGradle
     jobs:
     - job:
       displayName: Gradlew build 
@@ -20,7 +20,7 @@ stages:
             javaHomeOption: 'JDKVersion'
             sonarQubeRunAnalysis: false
             spotBugsAnalysis: false
-  - stage: Push docker image
+  - stage: PushDockerImage
     jobs:
       - job:
         displayName: Build Dockerfile

@@ -27,11 +27,4 @@ stages:
       - job:
         displayName: Build Dockerfile
         steps:
-          - task: Docker@2
-            inputs:
-              containerRegistry: 'azuredevops'
-              repository: 'https://hub.docker.com/repositories/gikuluca'
-              command: 'buildAndPush'
-              Dockerfile: '**/Dockerfile'
-              tags: '$(Build.BuildId)'
             

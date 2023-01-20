@@ -4,7 +4,10 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-  
+
+variables:
+  - name: DOCKER_IMAGE_NAME
+    value: app-cicd
 stages:
   # - stage: BuildGradle
   #   jobs:
@@ -33,5 +36,21 @@ stages:
               repository: 'gikuluca/cicddevops.azurecr.io'
               command: 'buildAndPush'
               Dockerfile: '**/Dockerfile'
-              tags: '$(Build.BuildId)'
+              tags: '$(DOCKER_IMAGE_NAME)$(Build.BuildId)'
+  - stage: Deploy to k8s dev
+    jobs:
+      - job:
+        variables:
+          - name: BUILD_ID
+            value: $(Build.BuildId)
+        displayName: Deploy to kube
+        steps:
+          - task: KubernetesManifest@0
+            inputs:
+              action: 'deploy'
+              kubernetesServiceConnection: 'k8s-dev-azure'
+              namespace: 'dev'
+              manifests: 'deploy.yaml'
+          
+
             

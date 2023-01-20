@@ -49,9 +49,8 @@ stages:
             action: 'deploy'
             kubernetesServiceConnection: 'k8s-dev-azure'
             namespace: 'dev'
-            strategy: 'canary'
-            percentage: '50'
             manifests: 'deploy.yaml'
+            
 
           
 

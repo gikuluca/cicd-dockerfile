@@ -7,7 +7,7 @@ pool:
 
 variables:
   - name: DOCKERIMAGENAME
-    value: app-cicd
+    value: gikuluca/cicddevops.azurecr.iossssssssssssssssssssssssssssssssss
 stages:
   # - stage: BuildGradle
   #   jobs:
@@ -36,21 +36,23 @@ stages:
               repository: 'gikuluca/cicddevops.azurecr.io'
               command: 'buildAndPush'
               Dockerfile: '**/Dockerfile'
-              tags: '$(DOCKERIMAGENAME)$(Build.BuildId)'
+              tags: |
+                'latest'
+                '$(Build.BuildId)'
   - stage: DeployToK8Sdev
     jobs:
       - job:
-        variables:
-          - name: BUILDID
-            value: $(Build.BuildId)
         displayName: Deploy to kube
         steps:
-          - task: KubernetesManifest@0
-            inputs:
-              action: 'deploy'
-              kubernetesServiceConnection: 'k8s-dev-azure'
-              namespace: 'dev'
-              manifests: 'deploy.yaml'
+        - task: KubernetesManifest@0
+          inputs:
+            action: 'deploy'
+            kubernetesServiceConnection: 'k8s-dev-azure'
+            namespace: 'dev'
+            strategy: 'canary'
+            percentage: '50'
+            manifests: 'deploy.yaml'
+
           
 
             

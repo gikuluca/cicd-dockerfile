@@ -37,7 +37,7 @@ stages:
               command: 'buildAndPush'
               Dockerfile: '**/Dockerfile'
               tags: '$(DOCKER_IMAGE_NAME)$(Build.BuildId)'
-  - stage: Deploy to k8s dev
+  - stage: DeployToK8Sdev
     jobs:
       - job:
         variables:

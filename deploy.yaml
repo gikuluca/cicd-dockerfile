@@ -1,0 +1,35 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-app-cicd-svc
+spec:
+  type: NodePort
+  selector:
+    app: app-cicd
+  ports:
+    - protocol:
+      port: 8080
+      nodePort: 8080
+      
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-cicd-deployment
+  labels:
+    app: app-cicd
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app-cicd-pod
+  templates:
+    metadata:
+      labels:
+        app: app-cicd-pod
+    spec:
+      containers:
+        - name: app-cicd-pod
+          image:  $DOCKER_IMAGE_NAME:$BUILD_NUMBER
+          ports:
+          - containerPort: 8080

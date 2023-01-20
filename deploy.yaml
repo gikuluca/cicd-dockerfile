@@ -30,6 +30,6 @@ spec:
     spec:
       containers:
         - name: app-cicd-pod
-          image:  $DOCKERIMAGENAME:$BUILDID
+          image: gikuluca/cicddevops.azurecr.io:latest
           ports:
           - containerPort: 8080

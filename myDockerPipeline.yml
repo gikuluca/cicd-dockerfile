@@ -36,7 +36,7 @@ stages:
               repository: 'gikuluca/cicddevops.azurecr.io'
               command: 'buildAndPush'
               Dockerfile: '**/Dockerfile'
-              tags: '$(DOCKER_IMAGE_NAME)$(Build.BuildId)'
+              tags: '$(DOCKERIMAGENAME)$(Build.BuildId)'
   - stage: DeployToK8Sdev
     jobs:
       - job:

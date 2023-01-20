@@ -23,7 +23,7 @@ spec:
   selector:
     matchLabels:
       app: app-cicd-pod
-  templates:
+  template:
     metadata:
       labels:
         app: app-cicd-pod

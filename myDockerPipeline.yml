@@ -6,7 +6,7 @@ pool:
 
 
 variables:
-  - name: DOCKER_IMAGE_NAME
+  - name: DOCKERIMAGENAME
     value: app-cicd
 stages:
   # - stage: BuildGradle
@@ -41,7 +41,7 @@ stages:
     jobs:
       - job:
         variables:
-          - name: BUILD_ID
+          - name: BUILDID
             value: $(Build.BuildId)
         displayName: Deploy to kube
         steps:

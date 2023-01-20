@@ -30,6 +30,6 @@ spec:
     spec:
       containers:
         - name: app-cicd-pod
-          image:  $DOCKER_IMAGE_NAME:$BUILD_NUMBER
+          image:  $DOCKER_IMAGE_NAME:$Build.BuildId
           ports:
           - containerPort: 8080

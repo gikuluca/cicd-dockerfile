@@ -7,7 +7,7 @@ pool:
 
 variables:
   - name: DOCKERIMAGENAME
-    value: gikuluca/cicddevops.azurecr.iossssssssssssssssssssssssssssssssss
+    value: gikuluca/cicddevops.azurecr.io
 stages:
   # - stage: BuildGradle
   #   jobs:
@@ -37,8 +37,8 @@ stages:
               command: 'buildAndPush'
               Dockerfile: '**/Dockerfile'
               tags: |
-                'latest'
-                '$(Build.BuildId)'
+                latest
+                $(Build.BuildId)
   - stage: DeployToK8Sdev
     jobs:
       - job:
